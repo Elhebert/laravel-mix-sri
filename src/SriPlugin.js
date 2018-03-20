@@ -1,22 +1,13 @@
 require('laravel-mix/src/helpers')
 
 class SriPlugin {
-  /**
-   * Create a new Manifest instance.
-   *
-   * @param {string} name
-   */
+
   constructor(options) {
     this.options = options
   }
 
-  /**
-   * Apply the plugin.
-   *
-   * @param {Object} compiler
-   */
   apply(compiler) {
-    compiler.plugin('done', (stats, callback) => {
+    compiler.plugin('done', (stats) => {
       let assets = Object.assign({}, stats.toJson().assetsByChunkName)
       let hashes = {}
 
@@ -33,8 +24,6 @@ class SriPlugin {
         path.join(__dirname, 'public/mix-sri.json'),
         JSON.stringify(hashes)
       )
-
-      callback()
     })
   }
 }
