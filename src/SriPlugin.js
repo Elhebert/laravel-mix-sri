@@ -14,7 +14,7 @@ class SriPlugin {
       flatten(assets).forEach(asset => {
         let hash = require('crypto')
           .createHash(this.options.algorithm)
-          .update(path.join(__dirname, `public${asset}`), 'utf8')
+          .update(require('fs').readFileSync(path.join(__dirname, `public${asset}`), 'utf8'))
           .digest('base64')
 
         hashes[asset] = `${this.options.algorithm}-${hash}`
