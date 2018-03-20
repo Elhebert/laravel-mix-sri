@@ -14,14 +14,14 @@ class SriPlugin {
       flatten(assets).forEach(asset => {
         let hash = require('crypto')
           .createHash(this.options.algorithm)
-          .update(require('fs').readFileSync(path.join(__dirname, `public${asset}`), 'utf8'))
+          .update(require('fs').readFileSync(path.join(require('process').cwd(), `public${asset}`), 'utf8'))
           .digest('base64')
 
         hashes[asset] = `${this.options.algorithm}-${hash}`
       })
 
       require('fs').writeFileSync(
-        path.join(__dirname, 'public/mix-sri.json'),
+        path.join(require('process').cwd(), 'public/mix-sri.json'),
         JSON.stringify(hashes)
       )
     })
