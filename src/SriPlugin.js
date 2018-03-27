@@ -8,7 +8,9 @@ class SriPlugin {
 
   apply(compiler) {
     compiler.plugin('done', (stats) => {
-      let assets = Object.assign({}, stats.toJson().assetsByChunkName)
+      let assets = stats.toJson().assets.map(asset=>{
+        return asset.name;
+      });
       let hashes = {}
 
       flatten(assets).forEach(asset => {
