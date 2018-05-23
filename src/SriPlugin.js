@@ -12,6 +12,10 @@ class SriPlugin {
       let hashes = {}
 
       flatten(assets).forEach(asset => {
+        if (asset[0] !== '/') {
+          asset = `/${asset}`
+        }
+
         let hash = require('crypto')
           .createHash(this.options.algorithm)
           .update(require('fs').readFileSync(path.join(require('process').cwd(), `public${asset}`), 'utf8'))
