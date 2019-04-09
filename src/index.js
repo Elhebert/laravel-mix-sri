@@ -10,7 +10,7 @@ class IntegrityHash {
     this.config = {
       algorithm: 'sha256',
       enabled: options.enabled || mix.inProduction(),
-      removeCacheBuster: false
+      removeCacheBuster: !!options.removeCacheBuster
     }
 
     if (['sha256', 'sha384', 'sha512'].includes(options.algorithm)) {
