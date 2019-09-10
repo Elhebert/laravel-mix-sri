@@ -26,7 +26,7 @@ class SriPlugin {
 
       require('fs').writeFileSync(
         path.join(require('process').cwd(), 'public/mix-sri.json'),
-        JSON.stringify(hashes)
+        JSON.stringify(hashes, null, 4)
       )
     })
   }
