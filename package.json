@@ -26,6 +26,6 @@
     },
     "devDependencies": {
         "laravel-mix": "^2.1.2 || ^3.0 || ^4.0",
-        "prettier": "^1.11.1"
+        "prettier": "^1.18.2"
     }
 }
