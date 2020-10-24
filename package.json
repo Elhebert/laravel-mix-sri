@@ -19,13 +19,13 @@
     "author": "Dieter Stinglhamber <elhebert@hotmail.be>",
     "license": "MIT",
     "peerDependencies": {
-        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
+        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0"
     },
     "engines": {
         "node": ">=6.0.0"
     },
     "devDependencies": {
-        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0",
         "prettier": "^1.18.2"
     }
 }
