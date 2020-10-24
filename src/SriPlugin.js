@@ -18,15 +18,15 @@ class SriPlugin {
 
         let hash = require('crypto')
           .createHash(this.options.algorithm)
-          .update(require('fs').readFileSync(path.join(require('process').cwd(), `public${asset}`), 'utf8'))
+          .update(require('fs').readFileSync(path.join(require('process').cwd(), Config.publicPath || 'public', asset), 'utf8'))
           .digest('base64')
 
         hashes[asset] = `${this.options.algorithm}-${hash}`
       })
 
       require('fs').writeFileSync(
-        path.join(require('process').cwd(), 'public/mix-sri.json'),
-        JSON.stringify(hashes)
+        path.join(require('process').cwd(), Config.publicPath || 'public', 'mix-sri.json'),
+        JSON.stringify(hashes, null, 4)
       )
     })
   }
