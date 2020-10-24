@@ -15,9 +15,7 @@ class SriPlugin {
           asset = `/${asset}`
         }
 
-        if (this.options.removeCacheBuster) {
-          asset = asset.replace(/(\?.*)$/g, '')
-        }
+        asset = asset.replace(/\?id=\w{20}/, '')
 
         let hash = require('crypto')
           .createHash(this.options.algorithm)
