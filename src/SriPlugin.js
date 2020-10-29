@@ -6,7 +6,11 @@ class SriPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin('done', stats => this.writeManifest(stats))
+    if (compiler.hooks) {
+      compiler.hooks.done.tap('done', stats => this.writeManifest(stats))
+    } else {
+      compiler.plugin('done', stats => this.writeManifest(stats))
+    }
   }
 
   writeManifest(stats) {
