@@ -1,4 +1,4 @@
-require('laravel-mix/src/helpers')
+const path = require("path");
 
 class SriPlugin {
   constructor(options) {
