@@ -1,6 +1,6 @@
 {
     "name": "laravel-mix-sri",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "subresources integrity for laravel mix",
     "main": "src/index.js",
     "repository": {
@@ -20,13 +20,13 @@
     "author": "Dieter Stinglhamber",
     "license": "MIT",
     "peerDependencies": {
-        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0"
+        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
     },
     "engines": {
         "node": ">=12.0.0"
     },
     "devDependencies": {
-        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0",
+        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
         "prettier": "^1.18.2"
     }
 }
