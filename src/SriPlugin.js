@@ -1,4 +1,5 @@
 require('laravel-mix/src/helpers')
+const path = require('path');
 
 class SriPlugin {
   constructor(options) {
@@ -6,7 +7,7 @@ class SriPlugin {
   }
 
   apply(compiler) {
-    compiler.plugin('done', stats => {
+    const process = stats => {
       let assets = Object.assign({}, stats.toJson().assetsByChunkName)
       let hashes = {}
 
@@ -34,7 +35,13 @@ class SriPlugin {
         path.join(require('process').cwd(), Config.publicPath, 'mix-sri.json'),
         JSON.stringify(hashes, null, 4)
       )
-    })
+    };
+
+    if (compiler.hooks) {
+      compiler.hooks.done.tap('SriPlugin', process)
+    } else {
+      compiler.plugin('done', process)
+    }
   }
 }
 
