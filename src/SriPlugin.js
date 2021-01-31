@@ -1,4 +1,5 @@
 require('laravel-mix/src/helpers')
+const collect = require('collect.js');
 const path = require('path');
 
 class SriPlugin {
@@ -10,6 +11,11 @@ class SriPlugin {
     const process = stats => {
       let assets = Object.assign({}, stats.toJson().assetsByChunkName)
       let hashes = {}
+
+      // If there's a temporary mix.js chunk, we can safely remove it.
+      if (assets.mix) {
+        assets.mix = collect(assets.mix).except('mix.js').all();
+      }
 
       flatten(assets).forEach(asset => {
         if (asset[0] !== '/') {
