@@ -1,12 +1,20 @@
-let mix = require('laravel-mix')
-const SriPlugin = require('./SriPlugin')
+import mix from 'laravel-mix'
+import SriPlugin from './SriPlugin'
+import webpack from 'webpack'
+
+type Options = {
+  algorithm?: 'sha256' | 'sha384' | 'sha512'
+  enabled?: boolean
+}
 
 class IntegrityHash {
-  name() {
+  private config: Options = {}
+
+  name(): string {
     return 'generateIntegrityHash'
   }
 
-  register(options = {}) {
+  register(options: Options = {}): void {
     this.config = {
       algorithm: 'sha256',
       enabled: options.enabled || mix.inProduction(),
@@ -17,9 +25,9 @@ class IntegrityHash {
     }
   }
 
-  webpackPlugins() {
+  webpackPlugins(): webpack.WebpackPluginInstance[] {
     if (this.config.enabled) {
-      return new SriPlugin(this.config)
+      return [new SriPlugin(this.config.algorithm)]
     }
   }
 }
