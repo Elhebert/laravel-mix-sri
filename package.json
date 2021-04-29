@@ -1,14 +1,15 @@
 {
     "name": "laravel-mix-sri",
-    "version": "0.0.6",
+    "version": "1.0.0-alpha",
     "description": "subresources integrity for laravel mix",
-    "main": "src/index.js",
+    "main": "build/index.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/Elhebert/laravel-mix-sri"
     },
     "scripts": {
-        "lint": "prettier --write \"**/*.js\""
+        "lint": "prettier --write '**/*.ts'",
+        "build": "tsc --project ./tsconfig.json"
     },
     "homepage": "https://github.com/Elhebert/laravel-mix-sri",
     "keywords": [
@@ -20,13 +21,14 @@
     "author": "Dieter Stinglhamber",
     "license": "MIT",
     "peerDependencies": {
-        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
+        "laravel-mix": "^6.0"
     },
     "engines": {
-        "node": ">=12.0.0"
+        "node": ">=15.0.0"
     },
     "devDependencies": {
-        "laravel-mix": "^2.1.2 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
-        "prettier": "^1.18.2"
+        "laravel-mix": "^6.0",
+        "prettier": "^2.2.1",
+        "typescript": "^4.2.4"
     }
 }
