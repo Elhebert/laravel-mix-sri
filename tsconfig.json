@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["laravel-mix"],
     "alwaysStrict": true,
     "module": "commonjs",
     "target": "es2018",
@@ -12,11 +13,12 @@
       "es2018"
     ],
     "esModuleInterop": true,
-    "noImplicitAny": false,
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "./build",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationDir": "./types"
   },
   "include": [
     "src/**/*"

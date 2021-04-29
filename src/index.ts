@@ -1,13 +1,14 @@
 import mix from 'laravel-mix'
 import SriPlugin from './SriPlugin'
 import webpack from 'webpack'
+import { ClassComponent } from 'laravel-mix/types/component'
 
-type Options = {
+export type Options = {
   algorithm?: 'sha256' | 'sha384' | 'sha512'
   enabled?: boolean
 }
 
-class IntegrityHash {
+class IntegrityHash implements ClassComponent {
   private config: Options = {}
 
   name(): string {

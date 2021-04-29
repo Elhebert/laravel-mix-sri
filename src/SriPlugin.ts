@@ -1,7 +1,9 @@
-import File from 'laravel-mix/src/File'
 import collect from 'collect.js'
 import webpack from 'webpack'
 import crypto from 'crypto'
+import fs from 'fs'
+import path from 'path'
+import { cwd } from 'process'
 
 export default class SriPlugin implements webpack.WebpackPluginInstance {
   constructor(private algorithm: 'sha256' | 'sha384' | 'sha512') {
@@ -15,9 +17,7 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
 
       // If there's a temporary mix.js chunk, we can safely remove it.
       if (assets.mix) {
-        assets.mix = collect(assets.mix)
-          .except(['mix.js'])
-          .all()
+        assets.mix = collect(assets.mix).except(['mix.js']).all()
       }
 
       collect<string>(assets)
@@ -32,14 +32,22 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
 
           filePath = filePath.replace(/\?id=\w{20}/, '')
 
-          const file: File = new File(filePath)
           hashes[filePath] = crypto
             .createHash(this.algorithm)
-            .update(file.read())
+            .update(
+              fs.readFileSync(
+                // @ts-ignore TS2304
+                path.join(cwd(), Config.publicPath, 'mix-sri.json')
+              )
+            )
             .digest('base64')
         })
 
-      new File('mix-sri.json').write(hashes)
+      fs.writeFileSync(
+        // @ts-ignore TS2304
+        path.join(cwd(), Config.publicPath, 'mix-sri.json'),
+        JSON.stringify(hashes, null, 4)
+      )
     }
 
     compiler.hooks.done.tapAsync('SriPlugin', process)
