@@ -16,9 +16,7 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "./build",
-    "rootDir": "./src",
-    "declaration": true,
-    "declarationDir": "./types"
+    "rootDir": "./src"
   },
   "include": [
     "src/**/*"

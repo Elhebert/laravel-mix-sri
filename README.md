@@ -2,7 +2,9 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-A laravel mix extension to generate integrity hashes on build for your assets.
+A laravel mix 6.0 extension to generate integrity hashes on build for your assets.
+
+For older version of mix, see [v0.0.7](https://github.com/Elhebert/laravel-mix-sri/tree/0.0.7)
 
 ## Installation
 
