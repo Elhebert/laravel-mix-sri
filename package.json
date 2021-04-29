@@ -1,6 +1,6 @@
 {
     "name": "laravel-mix-sri",
-    "version": "0.0.6",
+    "version": "1.0.0-alpha",
     "description": "subresources integrity for laravel mix",
     "main": "build/index.js",
     "types": "./types/index.d.ts",
@@ -9,7 +9,8 @@
         "url": "https://github.com/Elhebert/laravel-mix-sri"
     },
     "scripts": {
-        "lint": "prettier --write \"**/*.js\""
+        "lint": "prettier --write '**/*.ts'",
+        "build": "tsc --project ./tsconfig.json"
     },
     "homepage": "https://github.com/Elhebert/laravel-mix-sri",
     "keywords": [
