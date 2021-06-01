@@ -24,7 +24,7 @@
         "laravel-mix": "^6.0"
     },
     "engines": {
-        "node": ">=15.0.0"
+        "node": ">=14.0.0"
     },
     "devDependencies": {
         "laravel-mix": "^6.0",
