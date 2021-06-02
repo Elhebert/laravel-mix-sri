@@ -1,6 +1,6 @@
 {
     "name": "laravel-mix-sri",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "subresources integrity for laravel mix",
     "main": "build/index.js",
     "repository": {

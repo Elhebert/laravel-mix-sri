@@ -37,7 +37,7 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
             .update(
               fs.readFileSync(
                 // @ts-ignore TS2304
-                path.join(cwd(), Config.publicPath, 'mix-sri.json')
+                path.join(cwd(), Config.publicPath, filePath)
               )
             )
             .digest('base64')
