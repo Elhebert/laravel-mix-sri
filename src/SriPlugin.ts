@@ -32,7 +32,7 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
 
           filePath = filePath.replace(/\?id=\w{20}/, '')
 
-          hashes[filePath] = crypto
+          hashes[filePath] = this.algorithm + '-' + crypto
             .createHash(this.algorithm)
             .update(
               fs.readFileSync(
