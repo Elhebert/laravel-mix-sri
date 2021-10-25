@@ -12,35 +12,33 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
 
   apply(compiler: webpack.Compiler): void {
     const process = (stats: webpack.Stats) => {
-      let assets: Record<string, string[]> = stats.toJson().assetsByChunkName
+      let assets: webpack.StatsAsset[] = stats.toJson().assets
       let hashes: Record<string, string> = {}
 
-      // If there's a temporary mix.js chunk, we can safely remove it.
-      if (assets.mix) {
-        assets.mix = collect(assets.mix).except(['mix.js']).all()
-      }
-
-      collect<string>(assets)
-        .flatten()
-        // Don't add hot updates to manifest
-        .filter((name: string) => name.indexOf('hot-update') === -1)
+      collect<webpack.StatsAsset>(assets)
+        .filter(
+          asset => asset.type === 'asset' && !asset.name.includes('hot-update')
+        )
         .all()
-        .forEach((filePath: string) => {
+        .forEach(({ name: filePath }) => {
           if (!filePath.startsWith('/')) {
             filePath = `/${filePath}`
           }
 
           filePath = filePath.replace(/\?id=\w{20}/, '')
 
-          hashes[filePath] = this.algorithm + '-' + crypto
-            .createHash(this.algorithm)
-            .update(
-              fs.readFileSync(
-                // @ts-ignore TS2304
-                path.join(cwd(), Config.publicPath, filePath)
+          hashes[filePath] =
+            this.algorithm +
+            '-' +
+            crypto
+              .createHash(this.algorithm)
+              .update(
+                fs.readFileSync(
+                  // @ts-ignore TS2304
+                  path.join(cwd(), Config.publicPath, filePath)
+                )
               )
-            )
-            .digest('base64')
+              .digest('base64')
         })
 
       fs.writeFileSync(
