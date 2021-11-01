@@ -3,6 +3,7 @@
     "version": "1.0.6",
     "description": "subresources integrity for laravel mix",
     "main": "build/index.js",
+    "types": "types/index.d.ts",
     "repository": {
         "type": "git",
         "url": "https://github.com/Elhebert/laravel-mix-sri"
