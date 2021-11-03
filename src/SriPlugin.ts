@@ -25,7 +25,6 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
             filePath = `/${filePath}`
           }
 
-          filePath = filePath.replace(/\?id=\w{20}/, '')
           filePath = filePath.replace(/\?(\w{32}|id=\w{20})/, '')
 
           hashes[filePath] =
