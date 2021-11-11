@@ -17,7 +17,10 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
 
       collect<webpack.StatsAsset>(assets)
         .filter(
-          asset => asset.type === 'asset' && !asset.name.includes('hot-update')
+          asset =>
+            asset.type === 'asset' &&
+            asset.auxiliaryChunks.length === 0 &&
+            !asset.name.includes('hot-update')
         )
         .all()
         .forEach(({ name: filePath }) => {
