@@ -51,6 +51,6 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
       )
     }
 
-    compiler.hooks.done.tapAsync('SriPlugin', process)
+    compiler.hooks.done.tap('SriPlugin', process)
   }
 }
