@@ -6,8 +6,7 @@ import path from 'path'
 import { cwd } from 'process'
 
 export default class SriPlugin implements webpack.WebpackPluginInstance {
-  constructor(private algorithm: 'sha256' | 'sha384' | 'sha512') {
-    this.algorithm = algorithm
+  constructor(private algorithm: 'sha256' | 'sha384' | 'sha512', private output = 'mix-sri.json') {
   }
 
   apply(compiler: webpack.Compiler): void {
@@ -46,7 +45,7 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
 
       fs.writeFileSync(
         // @ts-ignore TS2304
-        path.join(cwd(), Config.publicPath, 'mix-sri.json'),
+        path.join(cwd(), Config.publicPath, this.output),
         JSON.stringify(hashes, null, 4)
       )
     }

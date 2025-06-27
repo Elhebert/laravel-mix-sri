@@ -5,6 +5,7 @@ import { ClassComponent } from 'laravel-mix/types/component'
 
 export type Options = {
   algorithm?: 'sha256' | 'sha384' | 'sha512'
+  output?: string
   enabled?: boolean
 }
 
@@ -18,6 +19,7 @@ class IntegrityHash implements ClassComponent {
   register(options: Options = {}): void {
     this.config = {
       algorithm: 'sha256',
+      output: options.output,
       enabled: options.enabled || mix.inProduction(),
     }
 
@@ -28,7 +30,7 @@ class IntegrityHash implements ClassComponent {
 
   webpackPlugins(): webpack.WebpackPluginInstance[] {
     if (this.config.enabled) {
-      return [new SriPlugin(this.config.algorithm)]
+      return [new SriPlugin(this.config.algorithm, this.config.output)]
     }
   }
 }
