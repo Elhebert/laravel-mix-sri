@@ -18,6 +18,7 @@ You can pass an object to the function. Available keys are:
 - `enabled`: boolean, default: `mix.Inproduction()`
 - `algorithm`: string, default: `'sha256'`
 - `output`: string, default: `'mix-sri.json'`
+- `mergeWithExistingFile`: boolean, default: `false`
 
 ## Usage
 

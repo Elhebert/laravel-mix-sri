@@ -6,8 +6,11 @@ import path from 'path'
 import { cwd } from 'process'
 
 export default class SriPlugin implements webpack.WebpackPluginInstance {
-  constructor(private algorithm: 'sha256' | 'sha384' | 'sha512', private output = 'mix-sri.json') {
-  }
+  constructor(
+    private algorithm: 'sha256' | 'sha384' | 'sha512',
+    private output = 'mix-sri.json',
+    private mergeWithExistingFile = false
+  ) {}
 
   apply(compiler: webpack.Compiler): void {
     const process = (stats: webpack.Stats) => {
@@ -43,9 +46,18 @@ export default class SriPlugin implements webpack.WebpackPluginInstance {
               .digest('base64')
         })
 
+      const outputPath = path.join(cwd(), Config.publicPath, this.output)
+      if (this.mergeWithExistingFile && fs.existsSync(outputPath)) {
+        const existingHashes = JSON.parse(fs.readFileSync(outputPath, 'utf8'))
+
+        hashes = {
+          ...existingHashes,
+          ...hashes,
+        }
+      }
+
       fs.writeFileSync(
-        // @ts-ignore TS2304
-        path.join(cwd(), Config.publicPath, this.output),
+        outputPath,
         JSON.stringify(hashes, null, 4)
       )
     }

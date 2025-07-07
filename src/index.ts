@@ -7,6 +7,7 @@ export type Options = {
   algorithm?: 'sha256' | 'sha384' | 'sha512'
   output?: string
   enabled?: boolean
+  mergeWithExistingFile?: boolean
 }
 
 class IntegrityHash implements ClassComponent {
@@ -21,6 +22,7 @@ class IntegrityHash implements ClassComponent {
       algorithm: 'sha256',
       output: options.output,
       enabled: options.enabled || mix.inProduction(),
+      mergeWithExistingFile: options.mergeWithExistingFile,
     }
 
     if (['sha256', 'sha384', 'sha512'].includes(options.algorithm)) {
@@ -30,7 +32,7 @@ class IntegrityHash implements ClassComponent {
 
   webpackPlugins(): webpack.WebpackPluginInstance[] {
     if (this.config.enabled) {
-      return [new SriPlugin(this.config.algorithm, this.config.output)]
+      return [new SriPlugin(this.config.algorithm, this.config.output, this.config.mergeWithExistingFile)]
     }
   }
 }
